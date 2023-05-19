@@ -2,7 +2,7 @@
 
 This repo implements U-Net models combined with various Recurrent Neural Networks (LSTM and GRU). In other words the model takes a 3D data as input and trains a U-Net combined with RNN (U-Net RNN) that learns to predict the next frame in a sequence. The U-Net RNN model is basically a standard U-Net model for each time sequence, except some of the convolutions are changed to convolutional RNNs. An example case can be seen in the below figure. 
 
-![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/c9814c07-75b2-476c-88d9-60265f93f7e4)
+![image](https://github.com/cemdaloglu/UNet-with-RNN/blob/main/image.png)
 
 In this repo, there are 7 experiments that are already implemented.
 
