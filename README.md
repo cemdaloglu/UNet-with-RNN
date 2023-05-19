@@ -19,6 +19,7 @@ In this repo, there are 7 experiments that are already implemented.
 - Dataset is not provided.
 - DataClass function in helper_funcs.py file is hard coded for input and label/target data. It should be changed according to your data.
 - input shape is (time sequences, channels, depth, height, width), and the target/label shape is (time sequences, depth, height, width).
+- In the helper_funcs.py main function, first element of filterList parameter must be the channel size.
 
 # Dependencies
 
