@@ -1,18 +1,40 @@
 # UNet-with-RNN
 
-This repo implements U-Net models combined with various Recurrent Neural Networks (LSTM and GRU). In other words the model takes a 3D data as input and trains a U-Net combined with RNN (U-Net RNN) that learns to predict the next frame in a sequence. The U-Net RNN model is basically a standard U-Net model for each time sequence, except some of the convolutions are changed to convolutional RNNs. An example case can be seen in the below figure. 
+This repo implements U-Net models combined with various Recurrent Neural Networks (LSTM and GRU). In other words the model takes a 3D data as input and trains a U-Net combined with RNN (U-Net RNN) that learns to predict the next frame in a sequence. It is implemented for my master's thesis about Real-Time 3D Reconstruction of guidewires. The U-Net RNN model is basically a standard U-Net model for each time sequence, except some of the convolutions are changed to convolutional RNNs. An example case can be seen below.
 
-![image](https://github.com/cemdaloglu/UNet-with-RNN/blob/main/image.png)
+# Real-Time 3D Reconstruction for Minimally Invasive Vascular Procedures
 
-In this repo, there are 7 experiments that are already implemented.
+In minimally invasive vascular procedures, accurate image guidance is crucial for successful outcomes. Traditional 2D fluoroscopy lacks depth information, prompting the need for 3D real-time image guidance. However, achieving high temporal resolution with low X-ray dose presents a challenge.
 
-- Baseline: Takes 3 previous time steps data and their predictions as input to a standard U-Net model and predicts the next frame.
-1. Same architecture as baseline, except that each resolution stage in the encoder consists of 1 conv-LSTM after the highest resolution stage.
-2. Same as 1, but with 2 conv-LSTM.
-3. Same as 1, but with 1 conv layer and 1 conv-LSTMs.
-4. Same as 1, but all conv-LSTMs are replaced by peephole conv-LSTMs.
-5. Same as 1, except that the two highest resolution stages stay unchanged.
-6. Same as 2, but all conv-LSTMs are replaced by conv-GRUs
+This project addresses this challenge by proposing two novel approaches to improve the accuracy of 3D reconstruction algorithms for interventional materials. The first approach involves incorporating additional temporal information, such as 3D reconstructions from previous time steps, into the reconstruction pipeline. The second approach utilizes long-short-term memory (LSTM) blocks to enhance temporal consistency. The RNN model architecture can be seen in the below figure.
+
+![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/4487cf39-896e-41cb-bb74-e6a403f42ed5)
+
+
+## Experiment Architectures
+
+- **DTR_baseline:** Trained on a dataset comprising 16,000 training samples and 6,000 validation samples. It was tested on a separate set of 24,000 backprojection pairs to predict the corresponding 3D reconstructions, unseen during the training phase. The conducted three new experiments are the following.
+- **DTR+PrevRecons:** This model was trained using the 16,000 backprojection pairs and their respective reconstructions from the DTR_baseline model's test set. To assess the performance of the DTR+PrevRecons model, we employed a set of 24,000 backprojection pairs for testing. Notably, the 16,000 prediction scenes used in this experiment were identical to those in the DTR baseline model's training set.
+- **DTR+PrevOwnRecons:** For training, this model utilized the 16,000 backprojection pairs and their corresponding reconstructions obtained from the DTR+PrevRecons model's test set.
+- **DTR+PrevGTs:** This model was trained using the 16,000 backprojection pairs alongside their respective ground truth reconstructions.
+
+1. The architecture remains consistent with the `DTR_baseline`, with the exception that each resolution stage in the encoder incorporates one convLSTM except the highest resolution stage.
+2. Similar to experiment 1, but with the inclusion of two convLSTMs at each resolution stage in the encoder.
+3. In alignment with experiment 1, a comparable structure is maintained; however, it includes one convolution layer and one convLSTM at each resolution stage in the encoder.
+4. Experiment 1's architecture is retained, but all convLSTMs are substituted with peephole convLSTMs.
+5. Similar to experiment 1, but the two highest resolution stages remain the same.
+6. Experiment 2's structure is mirrored, but all convLSTMs are substituted with convGRUs.
+7. Experiment 3's configuration is maintained, with the inclusion of eight time steps as input.
+8. Experiment 3's setup is replicated, but the loss function is evaluated only for the last time step.
+9. Experiment 3's architecture is emulated, with the training epochs doubled.
+
+Experimental results on a simulated guidewire dataset demonstrate significant improvements in reconstruction accuracy. Compared to the baseline algorithm, the proposed approaches achieve an enhanced Dice coefficient (DSC), with the second approach achieving the highest improvement to 79.04%. Tabular and graph of the results can be seen below.
+
+![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/45d202a4-ec59-4956-af8b-1ba036a94329)
+
+![Uploading image.png…]()
+
+
 
 # Data
 
