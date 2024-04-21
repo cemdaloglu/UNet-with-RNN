@@ -32,7 +32,19 @@ Experimental results on a simulated guidewire dataset demonstrate significant im
 
 ![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/45d202a4-ec59-4956-af8b-1ba036a94329)
 
-![Uploading image.png…]()
+All RNN experiments,
+
+![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/24e6ef1f-61a7-41b7-b418-e9ab3e3f318f)
+
+Top-performing experiments,
+
+![image](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/5bec10ba-3506-4055-a2bf-22f20a2f9946)
+
+
+
+Predictions of different models can be seen below,
+
+![Untitled video - Made with Clipchamp](https://github.com/cemdaloglu/UNet-with-RNN/assets/36455629/37f9015d-c969-4944-8c7d-c3a7b1765d86)
 
 
 
